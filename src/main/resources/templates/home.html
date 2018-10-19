@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Home Page</title>
+		
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+		
+	</head>
+	<body>
+		<nav th:replace="fragments/fragment :: navbar-home"></nav>
+		<h2>Sistem Informasi Kepegawaian</h2>
+		<h3>Selamat datang di Sistem Informasi Kepegawaian</h3>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+					Lihat Data Pegawai berdasarkan NIP
+					</div>
+					<div class="card-body">
+						<p class="card-text">Masukkan Nomor Induk Pegawai</p>
+						<form th:action="@{/pegawai}" method = "GET">
+							<br>
+							<input type = "text" name="nip" />
+							<button type="submit">Lihat</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+					Lihat Detail Jabatan
+					</div>
+					<div class="card-body">
+						<p class="card-text">Pilih Jabatan</p>
+						<form th:action="@{/jabatan/view}" method="GET">
+						    <select name='id'>
+						       <option> Pilih Jabatan </option>
+						       <option th:each="jabatan : ${listJabatan}" th:text="${jabatan.nama}" th:value="${jabatan.id}" ></option>
+						    </select>
+						    <button type="submit">Lihat</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+					Lihat Pegawai Termuda dan Tertua
+					</div>
+					<div class="card-body">
+					Pilih Instansi
+					<form th:action="@{/pegawai/termuda-tertua}" method="GET">
+						    <select name='id'>
+						       <option> Pilih Instansi </option>
+						       <option th:each="instansi : ${listInstansi}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}" th:value="${instansi.id}" ></option>
+						    </select>
+						    <button type="submit">Lihat</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

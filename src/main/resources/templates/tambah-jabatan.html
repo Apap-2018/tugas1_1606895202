@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Tambah Jabatan</title>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	</head>
+	
+	<body>
+	<nav th:replace="fragments/fragment :: navbar-home"></nav>
+		<h2>Tambah Jabatan</h2>
+		<form th:action="@{/jabatan/tambah}" method = "POST">
+		Nama: <br>
+		<input type = "text" name="nama" />
+		<br>
+		Deskripsi : <br>
+		<input type = "text" name="deskripsi" />
+		<br>
+		Gaji Pokok : <br>
+		<input type = "number" name="gaji_pokok" />
+		<br>
+		<button onclick="myFunction()" type="submit">Lihat</button>
+		</form>
+	</body>
+		<script>
+		function myFunction() {
+		    alert("Hello! I am an alert box!");
+		}
+		</script>
+</html>

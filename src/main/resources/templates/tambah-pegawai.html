@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Tambah Pegawai</title>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	</head>
+	
+	<body>
+	<nav th:replace="fragments/fragment :: navbar-home"></nav>
+		<h2>Tambah Pegawai</h2>
+		<form th:action="@{/pegawai/tambah}" method = "POST">
+		Nama: <br>
+		<input type = "text" name="nama" />
+		<br>
+		Tempat Lahir : <br>
+		<input type = "text" name="tempat_lahir" />
+		<br>
+		Tanggal Lahir: <br>
+		<input type = "date" name="tanggal_lahir" />
+		<br>
+		Tahun Masuk: <br>
+		<input type = "date" name="tahun_masuk" />
+		<br>
+		Provinsi: <br>
+		<input type = "text" name="provinsi" />
+		<br>
+		Nama Instansi: <br>
+		<input type = "text" name="instansi" />
+		<br>
+		Jabatan: <br>
+		<input type = "text" name="jabatan" />
+		<br>
+		<button type="submit">Simpan</button>	
+	</body>
+</html>
+		
