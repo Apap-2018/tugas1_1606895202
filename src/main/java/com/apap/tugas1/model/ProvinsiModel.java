@@ -28,6 +28,8 @@ public class ProvinsiModel implements Serializable{
 	@Column(name = "presentase_tunjangan", nullable = false)
 	private double presentase_tunjangan;
 	
+	
+	
 	public long getId() {
 		return id;
 	}

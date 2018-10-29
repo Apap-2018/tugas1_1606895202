@@ -1,8 +1,12 @@
 package com.apap.tugas1.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -17,6 +23,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,7 +54,7 @@ public class PegawaiModel implements Serializable{
 	@NotNull
 	@Size(max = 255)
 	@Column(name = "tahun_masuk", nullable = false)
-	private String tahun_masuk;
+	private String tahunMasuk;
 	
 	@NotNull
 	@Column(name = "tanggal_lahir")
@@ -58,7 +66,6 @@ public class PegawaiModel implements Serializable{
 	@JsonIgnore
 	private InstansiModel instansi;
 
-	
 	public long getId() {
 		return id;
 	}
@@ -67,7 +74,6 @@ public class PegawaiModel implements Serializable{
 		this.id = id;
 	}
 	
-
 	public long getIdPegawai() {
 		return id;
 	}
@@ -100,12 +106,12 @@ public class PegawaiModel implements Serializable{
 		this.tempat_lahir = tempat_lahir;
 	}
 
-	public String getTahun_masuk() {
-		return tahun_masuk;
+	public String getTahunMasuk() {
+		return tahunMasuk;
 	}
 
-	public void setTahun_masuk(String tahun_masuk) {
-		this.tahun_masuk = tahun_masuk;
+	public void setTahunMasuk(String tahun_masuk) {
+		this.tahunMasuk = tahun_masuk;
 	}
 
 	public Date getTanggal_lahir() {

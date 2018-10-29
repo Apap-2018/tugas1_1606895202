@@ -8,4 +8,5 @@ import com.apap.tugas1.model.JabatanModel;
 public interface JabatanDB extends JpaRepository<JabatanModel, Long> {
 	JabatanModel findById(long id);
 	List<JabatanModel> findAll();
+	
 }

@@ -12,11 +12,20 @@
 		<h3 th:text="'Nama : ' + ${pegawai.nama}"></h3>
 		<h3 th:text="'Tempat Lahir : ' + ${pegawai.tempat_lahir}"></h3>
 		<h3 th:text="'Tanggal Lahir : ' + ${pegawai.tanggal_lahir}"></h3>
-		<h3 th:text="'Tahun Masuk : ' + ${pegawai.tahun_masuk}"></h3>
-		<h3 th:text="'Nama Instansi : ' + ${pegawai.instansi.nama}"></h3>
-		<h3 th:text="'Jabatan : ' + ${pegawai.tahun_masuk}"></h3>
-		
-		<a th:href="@{'/pegawai/ubah/' + ${pegawai.id}}" class="btn">Ubah</a>
+		<h3 th:text="'Tahun Masuk : ' + ${pegawai.tahunMasuk}"></h3>
+		<h3 th:text="'Nama Instansi : ' + ${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama}"></h3>
+		<h3>Jabatan :</h3>
+		<div th:each="jabatanPegawai : ${jabatan}">
+			 <h3 th:text="' - ' + ${jabatanPegawai.jabatan.nama}"></h3>
+		</div>
+		<h3 th:text="'Gaji : Rp' + ${gaji}"></h3>
+		<form action="/pegawai/ubah" method="get">
+
+			<input type="hidden" name="nip" th:value="${pegawai.nip}">
+
+			<input type="submit" value="Ubah">
+
+		</form>
 	</body>
 </html>
 		

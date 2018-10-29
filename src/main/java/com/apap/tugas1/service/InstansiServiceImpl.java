@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apap.tugas1.model.InstansiModel;
+import com.apap.tugas1.model.ProvinsiModel;
 import com.apap.tugas1.repository.InstansiDB;
 
 @Service
@@ -22,6 +23,11 @@ public class InstansiServiceImpl implements InstansiService{
 	@Override
 	public InstansiModel findById(long id) {
 		return instansiDb.findById(id);
+	}
+
+	@Override
+	public List<InstansiModel> findByProvinsi(ProvinsiModel provinsi) {
+		return instansiDb.findByProvinsi(provinsi);
 	}
 	
 
