@@ -10,22 +10,38 @@
 	<nav th:replace="fragments/fragment :: navbar-home"></nav>
 		<h2>Tambah Pegawai</h2>
 		<form th:action="@{/pegawai/tambah}" method = "POST">
-		Nama: <br>
-		<input type = "text" name="nama" />
-		<br>
-		Tempat Lahir : <br>
-		<input type = "text" name="tempat_lahir" />
-		<br>
-		Tanggal Lahir: <br>
-		<input type = "date" name="tanggal_lahir" />
-		<br>
-		Tahun Masuk: <br>
-		<input type = "date" name="tahun_masuk" />
-		<br>
-		<p>
 				<div class="row">
-					<div class="col-lg-4">Provinsi</div>
-					<div class="col-lg-4">
+					<div class="col-lg-2">Nama</div>
+					<div class="col-lg-2">
+						<input type = "text" name="nama" />
+					</div>
+				</div>
+				<p>
+				<div class="row">
+					<div class="col-lg-2">Nama</div>
+					<div class="col-lg-2">
+						<input type = "text" name="tempat_lahir" />
+					</div>
+				</div>	
+				<p>
+				<div class="row">
+					<div class="col-lg-2">Tanggal Lahir</div>
+					<div class="col-lg-2">
+						<input type = "date" name="tanggal_lahir" />
+					</div>
+				</div>
+				<p>
+				<div class="row">
+					<div class="col-lg-2">Tahun Masuk</div>
+					<div class="col-lg-2">
+						<input type = "date" name="tahunMasuk" />
+					</div>
+				</div>
+				 	
+				<p>
+				<div class="row">
+					<div class="col-lg-2">Provinsi</div>
+					<div class="col-lg-2">
 						<select id="provinsi" name="provinsi">
 						    <option th:each="provinsi : ${listProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}"/>
 						</select>
@@ -33,8 +49,8 @@
 				</div>
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Nama Instansi</div>
-					<div class="col-lg-4">
+					<div class="col-lg-2">Nama Instansi</div>
+					<div class="col-lg-2">
 						<select name="instansi" th:value="*{instansi}" id="instansi">
 						    <option th:each="instansi: ${listInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}"/>
 						</select>
@@ -42,35 +58,36 @@
 				</div>
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Jabatan</div>
-					<div class="col-lg-8" th:each="jabatanPegawai, statusJabatan : *{jabatanPegawaiList}" >
+					<div class="col-lg-2">Jabatan</div>
+					<div class="col-lg-2" th:each="jabatanPegawai, statusJabatan : *{jabatanPegawaiList}" >
 						<select th:field="*{jabatanPegawaiList[__${statusJabatan.index}__].jabatan}" class="col-lg-12">
 						    <option th:each="jabatan, status : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"/>
 						</select>
 					</div>
 				</div>
 				<br><button type="submit" name="addJabatan">Tambah Jabatan Lainnya</button>
+			<br>
+			<button type="submit">Submit</button>
+		</form>
 	</body>
-	<script type="text/javascript">
-	$(document).ready(function () {
-		$("#tambahPegawai").addClass("active");   
-	    $("#provinsi").change(function () {
-            $.getJSON("/instansi/tambah", {
-                provinsiId : $(this).val(),
-                ajax : 'true'
-            }, function(data) {
-                var html = '';
-                var len = data.length;
-                for ( var i = 0; i < len; i++) {
-                    html += '<option value="' + data[i].id + '">'
-                            + data[i].nama + '</option>';
-                }
-                html += '';
-                console.log("berhasil"); 
-                $('#instansi').html(html);
-            });
-	    });   
-	});
+
+	<script th:inline="javascript">
+	$('#provinsi').change(
+	     function() {
+	         $.getJSON("/instansi/findByProvinsi", {
+	             provinsiId : $(this).val(),
+	             ajax : 'true'
+	         }, function(data) {
+	             var html = '<option value="">Pilih Instansi</option>';
+	             var len = data.length;
+	             for ( var i = 0; i < len; i++) {
+	                 html += '<option value="' + data[i].id + '">'
+	                         + data[i].nama + '</option>';
+	             }
+	             html += '</option>';
+	             $('#instansi').html(html);
+	         });
+	     });
 	</script>
 </html>
 		

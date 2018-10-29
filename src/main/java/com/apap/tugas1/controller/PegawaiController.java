@@ -156,37 +156,17 @@ public class PegawaiController {
 	public String tambahPegawai (@RequestParam String nip, Model model) {
 
 		PegawaiModel pegawai = pegawaiService.findByNIP(nip);
-
 		model.addAttribute("pegawai", pegawai);
-
-		
-
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 		String tanggalLahir = simpleDateFormat.format(pegawai.getTanggal_lahir());
-
 		model.addAttribute("tanggalLahir", tanggalLahir);
-
-		
-
 		List<InstansiModel> listInstansi = instansiService.findByProvinsi(pegawai.getInstansi().getProvinsi());
-
 		model.addAttribute("listInstansi", new HashSet(listInstansi));
-
-		
-
 		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
-
 		model.addAttribute("listJabatan", new HashSet(listJabatan));
-
-		
-
 		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
-
 		model.addAttribute("listProvinsi", listProvinsi);
-
 		model.addAttribute("headerTitle", "Ubah Pegawai");
-
 		return "ubah-pegawai";
 
 	}
@@ -194,33 +174,17 @@ public class PegawaiController {
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST, params={"addJabatan"})
 
 	private String addRowUbah(@ModelAttribute PegawaiModel pegawai, Model model) {
-
 		model.addAttribute("headerTitle", "Tambah Pegawai");
 		model.addAttribute("pegawai", pegawai);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 		String tanggalLahir = simpleDateFormat.format(pegawai.getTanggal_lahir());
-
 		model.addAttribute("tanggalLahir", tanggalLahir);
-
-		
-
 		List<InstansiModel> listInstansi = instansiService.findByProvinsi(pegawai.getInstansi().getProvinsi());
-
 		model.addAttribute("listInstansi", new HashSet(listInstansi));
-
-		
-
 		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
-
 		model.addAttribute("listJabatan", new HashSet(listJabatan));
-
-		
-
 		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
-
 		model.addAttribute("listProvinsi", listProvinsi);
-
 		return "ubah-pegawai";
 
 	}
@@ -228,55 +192,27 @@ public class PegawaiController {
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST, params={"deleteJabatan"})
 
 	private String deleteRowUbah(@ModelAttribute PegawaiModel pegawai, Model model, HttpServletRequest req) {
-
 		model.addAttribute("headerTitle", "Tambah Pegawai");
-
 		model.addAttribute("pegawai", pegawai); 
-
-		
-
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 		String tanggalLahir = simpleDateFormat.format(pegawai.getTanggal_lahir());
-
 		model.addAttribute("tanggalLahir", tanggalLahir);
-
-		
-
 		List<InstansiModel> listInstansi = instansiService.findByProvinsi(pegawai.getInstansi().getProvinsi());
-
 		model.addAttribute("listInstansi", new HashSet(listInstansi));
-
-		
-
 		List<JabatanModel> listJabatan = jabatanService.findAllJabatan();
-
 		model.addAttribute("listJabatan", new HashSet(listJabatan));
-
-		
-
 		List<ProvinsiModel> listProvinsi = provinsiService.getAllProvinsi();
-
 		model.addAttribute("listProvinsi", listProvinsi);
-
 		return "ubah-pegawai";
-
 	}
 	
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST)
-
 	public String ubahPegawai (@ModelAttribute PegawaiModel pegawai, Model model) {
-
 		String oldNip = pegawai.getNip();
-
 		pegawaiService.update(oldNip, pegawai);
-
 		model.addAttribute("pegawai", pegawai);
-
 		model.addAttribute("headerTitle", "Tambah Pegawai Sukses");
-
 		return "ubah";
-
 		}
 	
 	@RequestMapping(value = "/pegawai/termuda-tertua")
@@ -286,6 +222,10 @@ public class PegawaiController {
 		PegawaiModel pegawaiTertua = archive.get(archive.size()-1);
 		model.addAttribute("pegawaiTermuda", pegawaiTermuda);
 		model.addAttribute("pegawaiTertua", pegawaiTertua);
+		List<Jabatan_PegawaiModel> jabatanMuda = jabatan_pegawaiService.findByPegawai(pegawaiTermuda);
+		List<Jabatan_PegawaiModel> jabatanTua = jabatan_pegawaiService.findByPegawai(pegawaiTertua);
+		model.addAttribute("jabatanMuda", jabatanMuda);
+		model.addAttribute("jabatanTua", jabatanTua);
 		return "termuda-tertua";
 		
 	}

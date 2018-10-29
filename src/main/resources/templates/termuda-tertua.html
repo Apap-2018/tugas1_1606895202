@@ -7,23 +7,33 @@
 	</head>
 	<body>
 	<nav th:replace="fragments/fragment :: navbar-home"></nav>
-		<h2>Data Termuda Tertua</h2>
-		<h3 th:text="'NIP : ' + ${pegawaiTermuda.nip}"></h3>
-		<h3 th:text="'Nama : ' + ${pegawaiTermuda.nama}"></h3>
-		<h3 th:text="'Tempat Lahir : ' + ${pegawaiTermuda.tempat_lahir}"></h3>
-		<h3 th:text="'Tanggal Lahir : ' + ${pegawaiTermuda.tanggal_lahir}"></h3>
-		<h3 th:text="'Tahun Masuk : ' + ${pegawaiTermuda.tahun_masuk}"></h3>
-		<h3 th:text="'Nama Instansi : ' + ${pegawaiTermuda.instansi.nama}"></h3>
-		<h3 th:text="'Jabatan : ' + ${pegawaiTermuda.tahun_masuk}"></h3>
-		
-		<h2>Data Pegawai Tertua</h2>
-		<h3 th:text="'NIP : ' + ${pegawaiTertua.nip}"></h3>
-		<h3 th:text="'Nama : ' + ${pegawaiTertua.nama}"></h3>
-		<h3 th:text="'Tempat Lahir : ' + ${pegawaiTertua.tempat_lahir}"></h3>
-		<h3 th:text="'Tanggal Lahir : ' + ${pegawaiTertua.tanggal_lahir}"></h3>
-		<h3 th:text="'Tahun Masuk : ' + ${pegawaiTertua.tahun_masuk}"></h3>
-		<h3 th:text="'Nama Instansi : ' + ${pegawaiTertua.instansi.nama}"></h3>
-		<h3 th:text="'Jabatan : ' + ${pegawaiTertua.tahun_masuk}"></h3>
-		
+	<div class="row">
+			<div class="col-lg-4">
+			<h2>Data Termuda Tertua</h2>
+			<h3 th:text="'NIP : ' + ${pegawaiTermuda.nip}"></h3>
+			<h3 th:text="'Nama : ' + ${pegawaiTermuda.nama}"></h3>
+			<h3 th:text="'Tempat Lahir : ' + ${pegawaiTermuda.tempat_lahir}"></h3>
+			<h3 th:text="'Tanggal Lahir : ' + ${pegawaiTermuda.tanggal_lahir}"></h3>
+			<h3 th:text="'Tahun Masuk : ' + ${pegawaiTermuda.tahunMasuk}"></h3>
+			<h3 th:text="'Nama Instansi : ' + ${pegawaiTermuda.instansi.nama}"></h3>
+			<h3 th:text="'Jabatan : '"></h3>
+				<div th:each="jabatanPegawai : ${jabatanMuda}">
+				 	<h3 th:text="' - ' + ${jabatanPegawai.jabatan.nama}"></h3>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<h2>Data Pegawai Tertua</h2>
+				<h3 th:text="'NIP : ' + ${pegawaiTertua.nip}"></h3>
+				<h3 th:text="'Nama : ' + ${pegawaiTertua.nama}"></h3>
+				<h3 th:text="'Tempat Lahir : ' + ${pegawaiTertua.tempat_lahir}"></h3>
+				<h3 th:text="'Tanggal Lahir : ' + ${pegawaiTertua.tanggal_lahir}"></h3>
+				<h3 th:text="'Tahun Masuk : ' + ${pegawaiTertua.tahunMasuk}"></h3>
+				<h3 th:text="'Nama Instansi : ' + ${pegawaiTertua.instansi.nama}"></h3>
+				<h3 th:text="'Jabatan : '"></h3>	
+					<div th:each="jabatanPegawai : ${jabatanTua}">
+				 		<h3 th:text="' - ' + ${jabatanPegawai.jabatan.nama}"></h3>
+					</div>
+			</div>
+		</div>
 	</body>
 </html>
